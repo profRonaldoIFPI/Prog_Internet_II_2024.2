@@ -9,22 +9,26 @@
 <body>
     <h1>ToDo List</h1>
     <table>
-        <th>
-            <td>
+        <thead>
+            <th>
                 Task
-            </td>
-            <td>
+            </th>
+            <th>
                 Status
-            </td>
-            <td>
+            </th>
+            <th>
                 Action
-            </td>
-        </th>
-        <tr>
-            <td> tarefa 1</td>
-            <td> pendente </td>
-            <td> feito </td>
-        </tr>
+            </th>
+        </thead>
+        <tbody>
+            <% lista.forEach(task => { %>
+                <tr>
+                    <td><%= task.descricao %> </td>
+                    <td> pendente </td>
+                    <td> feito </td>
+                </tr>
+            <% }) %>
+        </tbody>
     </table>
     <a href="/novaTarefa">New task</a>
 </body>

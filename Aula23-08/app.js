@@ -1,4 +1,5 @@
 const express = require('express')
+const fs = require('fs')
 const app = express()
 
 app.set('view engine','ejs')
@@ -6,15 +7,37 @@ app.set('view engine','ejs')
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public')) //
 
+function carregaArquivo(){
+    try{
+        const lista = fs.readFileSync('todoList.json')
+        return JSON.parse(lista)
+    }catch(err){
+        console.log(err)
+        return []
+    }
+}
+function salvaArquivo(lista){
+    fs.writeFileSync('todoList.json', JSON.stringify(lista, null, 2))
+}
 app.get('/',(req, res)=>{
-    //carregar lista a partir de um arquivo
-    res.render('index')
+    const lista = carregaArquivo()
+    res.render('index',{
+        lista: lista
+    })
 })
 app.post('/',(req, res)=>{
-    //carregar a lista
-    //adiocionar a tarefa nova na lista
-    console.log(req.body.description)
-    res.render('index')
+    const descricao = req.body.description
+    const lista = carregaArquivo()
+    const novaTarefa = {
+        id: Date.now().toString(),
+        descricao: descricao,
+        estado: false 
+    };
+    lista.push(novaTarefa)     
+    salvaArquivo(lista);
+    res.render('index',{
+        lista: lista
+    })
 })
 app.get('/novaTarefa',(req, res)=>{
     res.render('cadastro')
