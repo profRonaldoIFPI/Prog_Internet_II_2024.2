@@ -43,17 +43,20 @@ app.get('/novaTarefa',(req, res)=>{
     res.render('cadastro')
 })
 app.post('/update',(req, res)=>{
-    //carregar a lista
-    //buscar a tarefa na lista
-    //modificar o item da lista
-    //salvar
+    const lista = carregaArquivo()
+    const id = req.body.id
+    const tarefa = lista.find(tarefa => tarefa.id === id)
+    if (tarefa){
+        tarefa.estado = true
+        salvaArquivo(lista) 
+    }
     res.redirect('/')
 })
 app.post('/delete',(req, res)=>{
-    //carregar a lista
-    //buscar a tarefa na lista
-    //apagar o item da lista
-    //salvar
+    let lista = carregaArquivo()
+    const id = req.body.id
+    lista = lista.filter(tarefa => tarefa.id !== id)
+    salvaArquivo(lista) 
     res.redirect('/')
 })
 

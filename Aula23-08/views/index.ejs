@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="/style.css">
     <title>ToDo list</title>
 </head>
 <body>
     <h1>ToDo List</h1>
-    <table>
+    <table class="striped centered" >
         <thead>
             <th>
                 Task
@@ -24,12 +25,25 @@
             <% lista.forEach(task => { %>
                 <tr>
                     <td><%= task.descricao %> </td>
-                    <td> pendente </td>
-                    <td> feito </td>
+                    <td><%= task.estado %></td>
+                    <td> 
+                        <% if (!task.estado){ %>
+                            <form action="/update" method="POST">
+                                <input name="id" type="hidden" value="<%= task.id %>">
+                                <button type="submit" class="waves-effect waves-light btn-small">Done</button>
+                            </form> 
+                        <% } else { %>
+                            <form action="/delete" method="POST">
+                                <input name="id" type="hidden" value="<%= task.id %>">
+                                <button type="submit" class="waves-effect waves-light btn-small pink accent-1">Delete</button>
+                            </form> 
+                        <% } %>
+                    </td>
                 </tr>
             <% }) %>
         </tbody>
     </table>
-    <a href="/novaTarefa">New task</a>
+    <a href="/novaTarefa" class="waves-effect waves-light btn">New task</a>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>
