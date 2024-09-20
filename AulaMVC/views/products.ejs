@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Produtos</title>
+</head>
+<body>
+  <h1>Lista de Produtos</h1>
+  <a href="/products/add">Adicionar Novo Produto</a>
+  <table border="1" cellpadding="10">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Preço (R$)</th>
+        <th>Descrição</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (products.length > 0) { %>
+        <% products.forEach(product => { %>
+          <tr>
+            <td><%= product.id %></td>
+            <td><%= product.name %></td>
+            <td><%= product.price.toFixed(2) %></td>
+            <td><%= product.description %></td>
+            <td>
+              <a href="/products/edit/<%= product.id %>">Editar</a>
+              <form action="/products/delete/<%= product.id %>" method="POST" style="display:inline;">
+                <button type="submit" onclick="return confirm('Tem certeza que deseja deletar este produto?')">Deletar</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      <% } else { %>
+        <tr>
+          <td colspan="5">Nenhum produto encontrado.</td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</body>
+</html>
+
+
