@@ -3,26 +3,26 @@ const router = express.Router();
 const productController = require('../controllers/productController');
 
 // Rota para listar produtos
-router.get('/products', productController.listProducts);
+router.get('/', productController.listProducts);
 
 // Rota para exibir o formulário de criação de produto
-router.get('/products/add', productController.showAddProductForm);
+router.get('/add', productController.showAddProductForm);
 
 // Rota para criar um novo produto
-router.post('/products', productController.createProduct);
+router.post('/', productController.createProduct);
 
 // Rota para exibir o formulário de edição de produto
-router.get('/products/edit/:id', productController.showEditProductForm);
+router.get('/edit/:id', productController.showEditProductForm);
 
 // Rota para atualizar um produto
-router.post('/products/edit/:id', productController.updateProduct);
+router.post('/edit/:id', productController.updateProduct);
 
 // Rota para deletar um produto
-router.post('/products/delete/:id', productController.deleteProduct);
+router.post('/delete/:id', productController.deleteProduct);
 
 // Redirecionar a raiz para a lista de produtos
 router.get('/', (req, res) => {
-  res.redirect('/products');
+  res.redirect('/');
 });
 
 module.exports = router;

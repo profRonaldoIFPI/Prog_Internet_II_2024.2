@@ -1,4 +1,3 @@
-// controllers/productController.js
 const db = require('../models');
 const Product = db.Product;
 
@@ -12,9 +11,9 @@ exports.listProducts = async (req, res) => {
   }
 };
 
-// Adicionar um novo produto (formulário já incluído na view)
+// Adicionar um novo produto
 exports.showAddProductForm = (req, res) => {
-  res.render('addProduct');
+  res.render('addProduct'); //form em views
 };
 
 // Criar um novo produto
@@ -27,14 +26,13 @@ exports.createProduct = async (req, res) => {
     res.status(500).send('Erro ao criar produto: ' + err.message);
   }
 };
-
 // Exibir formulário para editar um produto
 exports.showEditProductForm = async (req, res) => {
   const id = req.params.id;
   try {
     const product = await Product.findByPk(id);
     if (product) {
-      res.render('editProduct', { product });
+      res.render('editProduct', { product }); //form em views
     } else {
       res.status(404).send('Produto não encontrado');
     }
@@ -42,7 +40,6 @@ exports.showEditProductForm = async (req, res) => {
     res.status(500).send('Erro ao buscar produto: ' + err.message);
   }
 };
-
 // Atualizar um produto
 exports.updateProduct = async (req, res) => {
   const id = req.params.id;
@@ -59,7 +56,6 @@ exports.updateProduct = async (req, res) => {
     res.status(500).send('Erro ao atualizar produto: ' + err.message);
   }
 };
-
 // Deletar um produto
 exports.deleteProduct = async (req, res) => {
   const id = req.params.id;

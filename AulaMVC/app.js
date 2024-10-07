@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
-const path = require('path');
-const db = require('./models');
+const path = require('path'); // garante funcionar em Linux e Windows
+const db = require('./models'); //busca por módulos no arquio "index.js" (convensão do Node.js)
 const productRoutes = require('./routes/productRoutes');
 
 // Configurar o motor de templates
@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Rotas
-app.use('/', productRoutes);
+app.use('/products', productRoutes);
 
 // Sincronizar o Sequelize com o banco de dados
 db.sequelize.sync()
