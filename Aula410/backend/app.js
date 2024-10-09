@@ -1,9 +1,13 @@
 const express = require("express")
 const bodyParser = require("body-parser")
+const cors = require("cors")
 const app = express();
 
 //converte o 'body' das requisições em json
 app.use(bodyParser.json()); //já inclui o URL-encoded 
+
+// permitir requisições do front-end
+app.use(cors());
 
 //lista que será manipulada na API
 let usuarios = [
