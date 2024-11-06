@@ -47,13 +47,15 @@ npm install sequelize pg pg-hstore
   - **pg-hstore**: Utilitário para serializar e desserializar dados JSON para o PostgreSQL.
     - **Documentação**: [pg-hstore](https://www.npmjs.com/package/pg-hstore)
 
+**Nota**: Estou considerando que você já tem PostgreSQL instalado e configurado em sua máquina.
+
 **2.3.** Instalar **EJS**:
 
 ```bash
 npm install ejs
 ```
 
-- **EJS** é um motor de templates que nos permite gerar HTML com JavaScript simples.
+- **EJS** é um motor de templates (*template engine*) que nos permite gerar HTML com JavaScript simples.
 - **Documentação**: [EJS](https://ejs.co/)
 
 **2.4.** Instalar **express-session** e **connect-flash**:
@@ -100,8 +102,9 @@ module.exports = {
 ```
 
 - Aqui, estamos conectando ao banco de dados `database` com o usuário `usr` e a senha `pwd`.
-- **Nota**: Estou considerando que o PostgreSQL esteja instalado e em execução no seu sistema, e que o banco de dados `database` exista. 
 - **Documentação Sequelize para conexão**: [Sequelize - Conectando ao Banco de Dados](https://sequelize.org/master/manual/getting-started.html#connecting-to-a-database)
+
+**Nota**: Estou considerando que o banco de dados `database` exista no o PostgreSQL. 
 
 ---
 
