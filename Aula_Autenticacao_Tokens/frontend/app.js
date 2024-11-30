@@ -53,6 +53,8 @@ app.post('/login', async (req, res) => {
   try {
     const response = await api.post('/login', { username, password });
     req.session.token = response.data.token;
+    //o token vai ficar salvo na sessão (memoria RAM apenas)
+    
     req.session.username = username;
     res.redirect('/');
   } catch (error) {
@@ -86,8 +88,7 @@ app.get('/logout', (req, res) => {
 app.get('/protected', isAuthenticated, async (req, res) => {
   try {
     const response = await api.get('/protected', {
-      headers: { Authorization: req.session.token },
-      // headers: { Authorization: `Bearer ${req.session.token}` },
+      headers: { token: req.session.token },
     });
     res.render('protected', { data: response.data });
   } catch (error) {

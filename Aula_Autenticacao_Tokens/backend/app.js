@@ -56,7 +56,7 @@ app.post('/register', async (req, res) => {
   // Rota de login
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    console.log(username, password)
+    // console.log(username, password)
     if (!username || !password) {
       return res.status(400).json({ message: 'Username e senha são obrigatórios' });
     }
